@@ -12,7 +12,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/**
+ * 
+ * @author Elis Haruni
+ * 
+ * This is the GUI for the client with sime simple buttons
+ */
 public class ClienRCGui {
 
 	private JFrame frame;

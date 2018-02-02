@@ -9,7 +9,16 @@ import lejos.hardware.Sound;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 
-//To be run on the EV3
+/**
+ * 
+ * @author Elis Haruni
+ * @version 1.0
+ * 
+ * This class will be run on EV3 and is the server  for bluetooth  connection
+ * 
+ * @throws IOException
+ *
+ */
 public class BluetoothRCServer {
 	public static void main(String args[]) throws IOException {
 		
@@ -24,7 +33,6 @@ public class BluetoothRCServer {
 		IsEscapeDownChecker isEscapeDown = new IsEscapeDownChecker(server);
 		isEscapeDown.setDaemon(true);
 		isEscapeDown.start();
-		//balancingThread.start();
 		//Main loop of the program. The EV3 checks incoming data from the socket in the form of integers. 
 		//Depending on the incoming integer the EV3 executes a action.
 		while (true) {
@@ -36,41 +44,41 @@ public class BluetoothRCServer {
 			}
 			DataInputStream in = new DataInputStream(socket.getInputStream());
 			input = in.readInt();
-			// start the balancing act
-			if (input == 1) {
+			
+			if (input == 1)            // start the balancing act
+			{
 				balancingThread.start();
 				balancingThread.setSpeed(0);
 			} 
-			//moving forward with 10 speed
-			if (input == 2) {
+			if (input == 2) 	      //moving forward with 8 speed
+			{
 				balancingThread.increaseSpeed(8);
-				//motorA.backward();
-				//motorB.backward();
-			}
-			//moving backwards with 10 speed
-			if (input == 3) {
+				
+			}			
+			if (input == 3)            //moving backwards with 8 speed
+			{
 				balancingThread.increaseSpeed(-8);
 				
 			}
-			//turn right with 10 speed
-			if (input == 4) {
+			if (input == 4)         //turn right with 5 speed
+			{
 				balancingThread.turn(5);
 				
 			}
-			//turn left with 10 speed
-			if (input == 5) {
+			if (input == 5)  		//turn left with 5 speed   
+			{
 				balancingThread.turn(-5);
 				
 			}
-			//set speed 0 or stop
-			if (input == 6) {
+			if (input == 6)			//set speed 0 or stop
+			{
 				balancingThread.setSpeed(0);
 				balancingThread.turn(0);
 				
 				
 			}			
-			// piruet with 50 speed
-			if (input == 7) { 
+			if (input == 7)			// piruette with 40 speed
+			{ 
 				balancingThread.turn(40);
 				
 			}
@@ -81,6 +89,7 @@ public class BluetoothRCServer {
 		
 		//If IsEscapeDown instance of IsEscapeDownChecker closes the socket connection, an error occurs and
 		//the main program loop is broken out of to arrive at this point. Thus ending the program.
+		
 		Sound.setVolume(100);
 		Sound.buzz();
 		server.close();

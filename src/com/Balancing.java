@@ -18,6 +18,14 @@ import lejos.hardware.sensor.EV3GyroSensor;
 import lejos.robotics.SampleProvider;
 import lejos.utility.Delay;
 
+/**
+ * 
+ * @author Elis Haruni
+ * 
+ * This class will keep the balance of the robot. It is done in the run() method.
+ * It also provides methods to set the speed and direction of the robot.
+ * 
+ */
 public class Balancing extends Thread {
 
 
@@ -28,13 +36,22 @@ public class Balancing extends Thread {
 	private double speed = 0; 		
 	private double direction = 0; 
 	
+	/**
+	 * Move robot forward,backward or stop with speed=0.
+	 * @param s - double speed we want to set to motors[5(forward),-5(backward)] 
+	 * Speed can not be bigger than 10 because the robot will fall
+	 */
 	public void setSpeed(double s) {
 		if (s>10) s=10;			// Limit speed
 		if (s<-10) s=-10;
 		speed=s;
 	}
 	
-	
+	/**
+	 *  Move Robot forward o backward after he is balanced 
+	 *  
+	 * @param i - speed value [10(forward),-10(backward)] 
+	 */
 	public void increaseSpeed(double i){
 		setSpeed(speed+i);
 	}
@@ -62,23 +79,19 @@ public void run () {
 		double mDP1 = 0;
 		double mDP2 = 0;
 		double mDP3 = 0;
-		double pwr = 0; // motor power in [-100,100]
-		int loopCount=0;			// postpone activation of the motors until dt in the loop is stable
-		boolean ready=false; // for piruette we need to be balanced before
+		double pwr = 0;        // motor power in [-100,100]
+		int loopCount=0;	   // postpone activation of the motors until dt in the loop is stable
+		boolean ready=false;   // for piruette we need to be balanced before
 		
 		rightMotor.resetTachoCount();
 		leftMotor.resetTachoCount();
 		gyroSensor.reset();
 		
-		SampleProvider gyroReader = gyroSensor.getRateMode();
+		SampleProvider gyroReader = gyroSensor.getRateMode(); //get angle velocity
 		float[] sample = new float[gyroReader.sampleSize()];
 		long lastTimeStep = System.nanoTime();
 		
-		SampleProvider angleReader = gyroSensor.getRateMode();
-		//SampleProvider gyroReader = gyroSensor.getRateMode();
-		float[] Sample =new float[angleReader.sampleSize()];
-		//float[] sample = new float[gyroReader.sampleSize()];
-		long lastTimeStepP = System.nanoTime();
+		
 		
 		gAng=-0.25;
 		Sound.beepSequenceUp();
@@ -110,7 +123,7 @@ public void run () {
 			
 			
 			// Compute new motor power
-			mPos -= speed;	// make Robot go forward or backward
+			mPos -= speed;	       // make Robot go forward or backward
 			pwr = 0.08 * mSpd + 0.12 * mPos + 0.8 * gSpd + 15 * gAng;
 			if (pwr > 100) pwr = 100;
 			if (pwr < -100) pwr = -100;
@@ -131,9 +144,11 @@ public void run () {
 		leftMotor.close();
 		gyroSensor.close();
 	}
+
+
 /*
 public static void main(String[] args) {
-	// TODO Auto-generated method stub
+	
 	 System.out.println("I will be balanced soon!!");
 	 
 	 Balancing boy = new Balancing();

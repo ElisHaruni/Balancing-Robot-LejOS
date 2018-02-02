@@ -1,12 +1,15 @@
 package com;
-
 import java.io.IOException;
 import java.net.ServerSocket;
-
 import lejos.hardware.Button;
 
-//To be used in BluetoothRCServer class to monitor the state of 
-//the escape button on the EV3 menu (down or up).
+/**
+ * @author Elis Haruni 
+ * @version 1.0 
+ * This class will be used in BluetoothRCServer class to monitor the state of 
+ * the escape button on the EV3 menu (down or up).
+ * 
+ */
 public class IsEscapeDownChecker extends Thread {
 	ServerSocket socket;
 	
