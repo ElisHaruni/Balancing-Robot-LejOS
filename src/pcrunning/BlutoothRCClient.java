@@ -5,10 +5,12 @@ import java.io.IOException;
 import java.net.Socket;
 /**
  * 
+ * 
  * @author Elis Haruni
  * 
  * This class will be the client to send commands to a Robot
  * This is the part of application that runs on a computer.
+ *
  *
  */
 public class BlutoothRCClient {
