@@ -77,9 +77,9 @@ public class BluetoothRCServer {
 				
 				
 			}			
-			if (input == 7)			// piruette with 40 speed
+			if (input == 7)			// move in a square
 			{ 
-				balancingThread.turn(40);
+				new Square(balancingThread);
 				
 			}
 			
