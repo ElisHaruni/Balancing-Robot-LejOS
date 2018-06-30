@@ -1,5 +1,12 @@
 package com;
 
+/**
+ * @author k.rajendran
+ * 
+ * This class will move the robot in a square
+ * 
+ * */
+
 public class Square extends Thread {
 
 	private static Boolean SQUARE_COMPLETED = false;
@@ -13,6 +20,8 @@ public class Square extends Thread {
 
 	public void run() {
 
+		//This loop will move the robot in a square. 
+		//Starts with 0 speed, then move forward, turn right in loop
 		int count=0;
 		while (!SQUARE_COMPLETED) {
 			try {
@@ -38,6 +47,8 @@ public class Square extends Thread {
 	/**
 	 * @author k.rajendran
 	 * 
+	 * This will turn the robot right
+	 * 
 	 * */
 	public void turnRight() throws InterruptedException
 	{
@@ -45,12 +56,28 @@ public class Square extends Thread {
 		balancingThread.turn(5);
 		Thread.sleep(1000); //not sure about this time need to be calculated
 	}
+	
+	/**
+	 * @author k.rajendran
+	 * 
+	 * This will move the robot in forward direction
+	 * 
+	 * */
+	
 	public void moveForward() throws InterruptedException
 	{
 		balancingThread.turn(0);
 		balancingThread.setSpeed(8);
 		Thread.sleep(1000);
 	}
+	
+	/**
+	 * @author k.rajendran
+	 * 
+	 * This will stop the robot, speed=0
+	 * 
+	 * */
+	
 	public void fullStop()
 	{
 		balancingThread.setSpeed(0);
