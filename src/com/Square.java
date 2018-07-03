@@ -47,14 +47,14 @@ public class Square extends Thread {
 	/**
 	 * @author k.rajendran
 	 * 
-	 * This will turn the robot right
+	 * This will turn the robot right and is given with +ve value
 	 * 
 	 * */
 	public void turnRight() throws InterruptedException
 	{
 		balancingThread.setSpeed(0);
 		balancingThread.turn(5);
-		Thread.sleep(1000); //not sure about this time need to be calculated
+		Thread.sleep(1000); //not sure about this time needs to be calculated with the device
 	}
 	
 	/**
