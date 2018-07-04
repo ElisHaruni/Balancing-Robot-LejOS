@@ -13,7 +13,8 @@ import lejos.hardware.port.MotorPort;
  * 
  * @author Elis Haruni
  * @version 1.0
- * 
+ * @author Nikitha Vishwanath
+ * @version 1.1
  * This class will be run on EV3 and is the server  for bluetooth  connection
  * 
  * @throws IOException
@@ -82,7 +83,15 @@ public class BluetoothRCServer {
 				new Square(balancingThread);
 				
 			}
-			
+			if (input == 8)			
+			{ 
+				// circle with 5 speed
+	balancingThread.start();
+	balancingThread.increaseSpeed(2);
+	balancingThread.turn(15); // bigger the circle lessser the value
+	balancingThread.setSpeed(5);
+
+			}
 			
 			
 		}

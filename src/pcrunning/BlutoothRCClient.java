@@ -7,7 +7,9 @@ import java.net.Socket;
  * 
  * 
  * @author Elis Haruni
- * 
+ * @version 1.0
+ * @author Nikitha Vishwanath
+ * @version 1.1
  * This class will be the client to send commands to a Robot
  * This is the part of application that runs on a computer.
  *
@@ -93,6 +95,14 @@ public void piruet() throws IOException {
  *  will not stop robot from turning 
  * @throws IOException
  */
+public void circle() throws IOException {
+	
+	Socket socket = new Socket(IP, PORT);
+	DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+	out.writeInt(8);
+	socket.close();
+}
+
 public void stop() throws IOException {
 	
 	Socket socket = new Socket(IP, PORT);
